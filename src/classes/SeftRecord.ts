@@ -5,7 +5,7 @@ class SeftRecord {
     padding: string;
     type: string;
     offsetToContent: number;
-    contentLength: number;
+    contentLen: number;
     content: SeftRecordContent | null = null;
 
     constructor(record: DataView) {
@@ -19,7 +19,7 @@ class SeftRecord {
             .toString(16)
             .padStart(3, "0");
         this.offsetToContent = this.viewer.getUint32(4, true);
-        this.contentLength = this.viewer.getUint32(8, true);
+        this.contentLen = this.viewer.getUint32(8, true);
     }
 
     public set setPadding(padding: string) {
@@ -35,7 +35,7 @@ class SeftRecord {
         this.viewer.setUint32(4, offset);
     }
     public set setContentLength(len: number) {
-        this.contentLength = len;
+        this.contentLen = len;
         this.viewer.setUint32(8, len);
     }
     public set setContent(content: SeftRecordContent) {

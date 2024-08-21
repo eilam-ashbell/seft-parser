@@ -6,7 +6,6 @@ class SeftRecordContent {
     viewer: DataView;
     padding: string;
     recordType: string;
-    contentType: string;
     dataType: string;
     contentLen: number;
     recordNameLen: number;
@@ -22,7 +21,6 @@ class SeftRecordContent {
             .getUint16(2, true)
             .toString(16)
             .padStart(3, "0");
-        this.contentType = recordTypes[this.recordType].contentType;
         this.recordNameLen = this.viewer.getUint32(4, true);
         this.contentLen = this.viewer.byteLength - this.recordNameLen - 8;
 
@@ -33,15 +31,20 @@ class SeftRecordContent {
             )
         );
 
-        this.recordRawData = this.viewer.buffer.slice(this.viewer.byteOffset, this.viewer.byteOffset + this.viewer.byteLength)
-        
+        this.recordRawData = this.viewer.buffer.slice(
+            this.viewer.byteOffset,
+            this.viewer.byteOffset + this.viewer.byteLength
+        );
+
         decoder.decode(this.recordRawData.slice(0, 4)) === "DOFS"
             ? (this.isDOFSRecord = true)
             : (this.isDOFSRecord = false);
         this.dataType = recordTypes[this.recordType].contentType;
 
         this.value = dataParsers[this.dataType]
-            ? (this.value = dataParsers[this.dataType](this.recordRawData.slice(-this.contentLen)))
+            ? (this.value = dataParsers[this.dataType](
+                  this.recordRawData.slice(-this.contentLen)
+              ))
             : (this.value = this.recordRawData);
     }
 
@@ -55,7 +58,7 @@ class SeftRecordContent {
     }
     public set setRecordType(recordType: string) {
         this.recordType = recordType;
-        this.contentType = recordTypes[this.recordType].contentType;
+        this.dataType = recordTypes[this.recordType].contentType;
         this.viewer.setUint16(2, parseInt(recordType, 16));
     }
 
@@ -68,7 +71,7 @@ class SeftRecordContent {
     public set setRecordRawData(data: ArrayBuffer) {
         this.recordRawData = data;
         this.dataType = recordTypes[this.recordType].contentType;
-        
+
         // this.value = dataParsers[this.dataType]
         //     ? (this.value = dataParsers[this.dataType](this.recordRawData.slice(-this.contentLen)))
         //     : (this.value = this.recordRawData);

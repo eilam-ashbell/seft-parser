@@ -67,7 +67,7 @@ class Seft {
                 new DataView(
                     this.viewer.buffer,
                     recordStartOffset,
-                    this.records[i].contentLength
+                    this.records[i].contentLen
                 )
             );
 
@@ -80,7 +80,7 @@ class Seft {
         );
     }
 
-    public get metadata(): Record<string, any> | null {
+    public get getMetadata(): Record<string, any> | null {
         if (this.records) {
             const recordValues: [string | undefined, any][] = Object.values(
                 this.records
