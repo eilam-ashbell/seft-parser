@@ -68,7 +68,7 @@ const recordTypes: Record<string, IRecordTypes> = {
     },
     aa1: {
         fieldNames: ["MCC_Data"],
-        contentType: "number",
+        contentType: "mcc",
         // convertFunc: recordContentParsers.mcc,
     },
     ab0: {

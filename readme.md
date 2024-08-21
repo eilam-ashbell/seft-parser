@@ -1,6 +1,8 @@
 # SEFT-parser
 
-SEFT-parser is an image parser for reading Samsung trailer metadata
+SEFT-parser is an image parser for reading Samsung trailer metadata.
+
+This package was written thanks to the analysis that Dr. Neal Krawetz performed and wrote in [this blog post](https://www.hackerfactor.com/blog/index.php?/archives/1039-Reversing-Samsung-Metadata.html)
 
 ## Installation
 
