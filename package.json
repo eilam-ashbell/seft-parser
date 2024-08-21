@@ -1,0 +1,55 @@
+{
+    "name": "seft-parser",
+    "version": "1.0.0",
+    "description": "An image parser for Samsung trailer metadata",
+    "main": "./lib/cjs/index.js",
+    "types": "./lib/cjs/types/index.d.ts",
+    "module": "./lib/esm/index.js",
+    "files": [
+        "./lib/**/*"
+    ],
+    "scripts": {
+        "start": "nodemon --exec ts-node src/index.ts",
+        "clean": "rm -rf ./lib",
+        "build": "npm run clean && npm run build:esm && npm run build:cjs",
+        "build:esm": "tsc -p ./configs/tsconfig.json && mv lib/esm/index.js lib/esm/index.mjs",
+        "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+        "prepublishOnly": "npm run build",
+        "rst": "npm run build && npm link"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:eilam-ashbell/seft-parser.git"
+    },
+    "keywords": [
+        "JPEG",
+        "JPG",
+        "image",
+        "photo",
+        "analysis",
+        "metadata",
+        "Samsung",
+        "SEFT",
+        "SEFH"
+    ],
+    "author": "Eilam Ashbell",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^20.8.0",
+        "nodemon": "^3.0.1",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.2.2"
+    },
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./lib/esm/types/index.d.ts",
+                "default": "./lib/esm/index.mjs"
+            },
+            "require": {
+                "types": "./lib/cjs/types/index.d.ts",
+                "default": "./lib/cjs/index.js"
+            }
+        }
+    }
+}
