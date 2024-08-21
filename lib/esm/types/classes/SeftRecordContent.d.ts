@@ -2,7 +2,6 @@ declare class SeftRecordContent {
     viewer: DataView;
     padding: string;
     recordType: string;
-    contentType: string;
     dataType: string;
     contentLen: number;
     recordNameLen: number;

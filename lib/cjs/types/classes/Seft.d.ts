@@ -12,6 +12,6 @@ declare class Seft {
     records: Record<number, SeftRecord>;
     segmentData: ArrayBuffer;
     constructor(image: ArrayBuffer | string);
-    get metadata(): Record<string, any> | null;
+    get getMetadata(): Record<string, any> | null;
 }
 export default Seft;

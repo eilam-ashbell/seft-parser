@@ -4,7 +4,7 @@ declare class SeftRecord {
     padding: string;
     type: string;
     offsetToContent: number;
-    contentLength: number;
+    contentLen: number;
     content: SeftRecordContent | null;
     constructor(record: DataView);
     set setPadding(padding: string);
